@@ -5,17 +5,27 @@ import simplephoneinfo.MenuViewer;
 import java.util.InputMismatchException;
 
 public class PhoneBookManager {
-    private static PhoneBookManager pbm = new PhoneBookManager();
     private static final int MAX_CNT = 100;
     PhoneInfo[] obj ;  //부모 클래스의 타입으로 객체 배열 선언
     int count;
-    public PhoneBookManager() {
-        obj = new PhoneInfo[MAX_CNT];
-        count = 0;
-    }
 
-    public static PhoneBookManager getInstance() {
-        return PhoneBookManager.pbm;
+    //3단계 생성자.
+//    public PhoneBookManager() {
+//        obj = new PhoneInfo[MAX_CNT];
+//        count = 0;
+//    }
+
+    private static PhoneBookManager instance = null;
+    public static PhoneBookManager getInstance() {  //싱글톤 패턴사용
+        if (instance == null) {
+            instance = new PhoneBookManager();
+        }
+        return instance;
+    }
+    //현재 생성자 접근 제어자를 private 로 설정.
+    private PhoneBookManager(){
+        count=0;
+        obj = new PhoneInfo[MAX_CNT];
     }
 
     //데이더 저장
@@ -57,8 +67,7 @@ public class PhoneBookManager {
             System.out.println("저장 공간이 없습니다. 연락처를 삭제하거나 종료해주세요.");
         } else {
             System.out.println("데이터 입력을 시작합니다.");
-            System.out.println("1. 일반, 2. 대학, 3. 회사");
-            System.out.print("선택 >> ");
+            MenuViewer.showSubMenu();
 
                 int choice = MenuViewer.scan.nextInt();
                 MenuViewer.scan.nextLine();

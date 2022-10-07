@@ -29,7 +29,7 @@ public class PhonebookVer04 {
                 MenuViewer.showMainMenu();
                 choice = MenuViewer.scan.nextInt();
                 MenuViewer.scan.nextLine();
-                MenuViewer.checkBound(num, 1, 4);  //checkBound 메서드에서 오류잡기
+                MenuViewer.checkBound(choice, 1, 4);  //checkBound 메서드에서 오류잡기
 
                 switch (choice) {
                     case 1:
