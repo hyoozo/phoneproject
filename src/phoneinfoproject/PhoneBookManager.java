@@ -2,19 +2,19 @@ package phoneinfoproject;
 
 import simplephoneinfo.MenuViewer;
 
-import java.util.InputMismatchException;
-
-public class PhoneBookManager {
+public class PhoneBookManager implements InputMenu, Menu{
     private static final int MAX_CNT = 100;
     PhoneInfo[] obj ;  //부모 클래스의 타입으로 객체 배열 선언
     int count;
 
-    //3단계 생성자.
-//    public PhoneBookManager() {
-//        obj = new PhoneInfo[MAX_CNT];
-//        count = 0;
-//    }
+    /*3, 4단계 생성자.
+    public PhoneBookManager() {
+        obj = new PhoneInfo[MAX_CNT];
+        count = 0;
+    }
+    */
 
+    //5단계 필드명 및 생성자 구형
     private static PhoneBookManager instance = null;
     public static PhoneBookManager getInstance() {  //싱글톤 패턴사용
         if (instance == null) {
@@ -71,9 +71,13 @@ public class PhoneBookManager {
 
                 int choice = MenuViewer.scan.nextInt();
                 MenuViewer.scan.nextLine();
-                MenuViewer.checkBound(choice,1,3); //checkBound 메서드에서 오류잡기
-                PhoneInfo info = null;
-
+                OutOfBoundException.checkBound(choice,1,3); //checkBound 메서드에서 오류잡기
+                PhoneInfo info = switch (choice) {
+                    case InputMenu.NORMAL -> readFriendInfo();
+                    case InputMenu.UNIV -> readUnivFriendInfo();
+                    case InputMenu.COMPANY -> readCompanyFriendInfo();
+                    default -> null;
+                /*
                 switch (choice) {
                     case 1:
                         info = readFriendInfo();
@@ -85,10 +89,11 @@ public class PhoneBookManager {
                         info = readCompanyFriendInfo();
                         break;
                 }
+                 */
+                };
             obj[count++] = info;
             System.out.println("데이터 입력이 완료되었습니다.");
-
-
+            PhonebookVer04.showArr(obj);
         }
     }
     //데이터 검색
@@ -123,6 +128,7 @@ public class PhoneBookManager {
             }
             count--;
             System.out.println("데이터 삭제가 완료되었습니다. \n");
+            PhonebookVer04.showArr(obj);
         }
     }
 

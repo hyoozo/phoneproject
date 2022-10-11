@@ -5,8 +5,6 @@ import simplephoneinfo.MenuViewer;
 import java.util.InputMismatchException;
 
 public class PhonebookVer04 {
-    public static int num = 0;
-    public static int saveNum = 0;
 
     public static void showArr(PhoneInfo[] arr) { // 저장된 배열 보여주는 메서드
         System.out.println("[ 전화번호 리스트 ]");
@@ -29,21 +27,16 @@ public class PhonebookVer04 {
                 MenuViewer.showMainMenu();
                 choice = MenuViewer.scan.nextInt();
                 MenuViewer.scan.nextLine();
-                MenuViewer.checkBound(choice, 1, 4);  //checkBound 메서드에서 오류잡기
+                OutOfBoundException.checkBound(choice, 1, 4);  //checkBound 메서드에서 오류잡기
 
                 switch (choice) {
-                    case 1:
-                        manager.saveData();
-                        break;
-                    case 2:
-                        manager.findPhoneInfo();
-                        break;
-                    case 3:
-                        manager.deletePhoneInfo();
-                        break;
-                    case 4:
+                    case Menu.INPUT -> manager.saveData();
+                    case Menu.SERCH -> manager.findPhoneInfo();
+                    case Menu.DELETE -> manager.deletePhoneInfo();
+                    case Menu.EXIT -> {
                         System.out.println("프로그램을 종료합니다.");
                         return;
+                    }
                 }
             } catch (InputMismatchException e) {
                 System.out.println("문자를 입력하였습니다. 다시 선택하세요.");
