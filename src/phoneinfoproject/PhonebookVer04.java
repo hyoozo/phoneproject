@@ -6,20 +6,22 @@ import java.util.InputMismatchException;
 
 public class PhonebookVer04 {
 
-    public static void showArr(PhoneInfo[] arr) { // 저장된 배열 보여주는 메서드
-        System.out.println("[ 전화번호 리스트 ]");
-        for (int i = 0; i < arr.length; i++) {
-            try {
-                System.out.println((i + 1) + ". " + arr[i].getName());
-            } catch (NullPointerException e) {
-                continue;
-            }
-        }
-        System.out.println("[-------------]\n");
-    }
+//    public static void showArr(PhoneInfo[] arr) { // 저장된 배열 보여주는 메서드
+//        System.out.println("[ 전화번호 리스트 ]");
+//        for (int i = 0; i < arr.length; i++) {
+//            try {
+//                System.out.println((i + 1) + ". " + arr[i].getName());
+//            } catch (NullPointerException e) {
+//                continue;
+//            }
+//        }
+//        System.out.println("[-------------]\n");
+//    }
 
     public static void main(String[] args) {
-        PhoneBookManager manager = PhoneBookManager.getInstance();
+        PhoneBookManager manager = PhoneBookManager.getPhoneBookManager();
+        //싱글톤으로 .getPhoneBookManager 로 객체 생성.
+        //다른곳에서 getPhoneBookManager 로 객체 생성하여도 동일한 주솟값을 가진다.
 
         int choice;
         while (true) {

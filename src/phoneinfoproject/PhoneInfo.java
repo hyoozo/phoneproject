@@ -2,7 +2,7 @@ package phoneinfoproject;
 
 import java.util.Objects;
 
-public class PhoneInfo {
+public class PhoneInfo implements Comparable<PhoneInfo>{
     private String name;
     private String phoneNumber;
     private String group;
@@ -52,17 +52,21 @@ public class PhoneInfo {
     public boolean equals(Object o) {
         if (o instanceof PhoneInfo) {
             PhoneInfo phoneInfo = (PhoneInfo) o;
-            if (this.name == phoneInfo.name) {
-                return true;
-            }
+            return name.equals(phoneInfo.name);
+        } else {
+            return false;
         }
-        return false;
     }
 
     @Override
     public int hashCode() {
         return name.hashCode();
 //                Objects.hash(name);
+    }
+
+    @Override
+    public int compareTo(PhoneInfo o) {
+        return name.compareTo(o.name);
     }
 }
 
