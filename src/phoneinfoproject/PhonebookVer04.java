@@ -31,7 +31,7 @@ public class PhonebookVer04 {
 
                 switch (choice) {
                     case Menu.INPUT -> manager.saveData();
-                    case Menu.SERCH -> manager.findPhoneInfo();
+                    case Menu.SEARCH -> manager.findPhoneInfo();
                     case Menu.DELETE -> manager.deletePhoneInfo();
                     case Menu.EXIT -> {
                         System.out.println("프로그램을 종료합니다.");

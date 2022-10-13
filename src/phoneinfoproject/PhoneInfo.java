@@ -50,15 +50,19 @@ public class PhoneInfo {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PhoneInfo phoneInfo = (PhoneInfo) o;
-        return name.equals(phoneInfo.name);
+        if (o instanceof PhoneInfo) {
+            PhoneInfo phoneInfo = (PhoneInfo) o;
+            if (this.name == phoneInfo.name) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return name.hashCode();
+//                Objects.hash(name);
     }
 }
 
