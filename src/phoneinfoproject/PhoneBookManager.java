@@ -2,10 +2,17 @@ package phoneinfoproject;
 
 import simplephoneinfo.MenuViewer;
 
+import java.util.HashSet;
+import java.util.Iterator;
+
 public class PhoneBookManager implements InputMenu, Menu{
     private static final int MAX_CNT = 100;
     PhoneInfo[] obj ;  //부모 클래스의 타입으로 객체 배열 선언
     int count;
+    HashSet<PhoneInfo> phoneHs = new HashSet<>();
+    private Iterator<PhoneInfo> itr;
+
+
 
     /*3, 4단계 생성자.
     public PhoneBookManager() {
@@ -91,10 +98,16 @@ public class PhoneBookManager implements InputMenu, Menu{
                 }
                  */
                 };
-            obj[count++] = info;
+            phoneHs.add(info);
+//            obj[count++] = info;
             System.out.println("데이터 입력이 완료되었습니다.");
-            PhonebookVer04.showArr(obj);
+//            PhonebookVer04.showArr(obj);
+            itr = phoneHs.iterator();
+            while (itr.hasNext()) {
+                System.out.println(itr.next().getName());
+            }
         }
+
     }
     //데이터 검색
     public void findPhoneInfo() {
@@ -102,14 +115,34 @@ public class PhoneBookManager implements InputMenu, Menu{
 
             System.out.print("이름 : ");
             String name = MenuViewer.scan.nextLine();
-
-            int dataIdx = search(name);
-            if (dataIdx < 0) {
-                System.out.println("해당하는 데이터가 존재하지 않습니다. \n");
+        for (PhoneInfo a : phoneHs){
+            if(name.equals(a.getName())){
+                a.showPhoneInfo();
+                break;
             } else {
-                obj[dataIdx].showPhoneInfo();
-                System.out.println("데이터 검색이 완료되었습니다. \n");
+                System.out.println("해당하는 데이터가 존재하지 않습니다. \n");
+                break;
             }
+
+        }
+//            itr = phoneHs.iterator();
+//        while (itr.hasNext()) {
+//             PhoneInfo a = itr.next();
+//            if(name.equals(a.getName())){
+//                a.showPhoneInfo();
+//                break;
+//            } else {
+//                System.out.println("해당하는 데이터가 존재하지 않습니다. \n");
+//                break;
+//            }
+//        }
+//            int dataIdx = search(name);
+//            if (dataIdx < 0) {
+//                System.out.println("해당하는 데이터가 존재하지 않습니다. \n");
+//            } else {
+//                obj[dataIdx].showPhoneInfo();
+//                System.out.println("데이터 검색이 완료되었습니다. \n");
+//            }
     }
 
     //데이터 삭제
@@ -119,28 +152,36 @@ public class PhoneBookManager implements InputMenu, Menu{
         System.out.print("이름 : ");
         String name = MenuViewer.scan.nextLine();
 
-        int dataIdx = search(name);
-        if (dataIdx < 0) {
-            System.out.println("해당하는 데이터가 존재하지 않습니다 \n");
-        } else {
-            for (int idx = dataIdx; idx < (count-1); idx++){
-                obj[idx] = obj[idx+1];
+        itr = phoneHs.iterator();
+        while (itr.hasNext()) { // 있는지 체크
+            PhoneInfo a = itr.next();
+            if (name.equals(a.getName())) { // 만약에 같다면.
+//						adSet.remove(a); //a를 지워라. 이렇게하면 while문이 불안정하게 돌아가서 오류가 발생.
+                itr.remove(); // 그래서 이런 식으로 코드를 작성해야 함.
+                count--;
             }
-            count--;
-            System.out.println("데이터 삭제가 완료되었습니다. \n");
-            PhonebookVer04.showArr(obj);
+//        int dataIdx = search(name);
+//        if (dataIdx < 0) {
+//            System.out.println("해당하는 데이터가 존재하지 않습니다 \n");
+//        } else {
+//            for (int idx = dataIdx; idx < (count-1); idx++){
+//                obj[idx] = obj[idx+1];
+//            }
+//            count--;
+//            System.out.println("데이터 삭제가 완료되었습니다. \n");
+//            PhonebookVer04.showArr(obj);
         }
     }
 
     //3단계 배열에 데이터 검색
-    private int search(String name) {
-        for (int idx = 0; idx < count; idx++) {
-            PhoneInfo countInfo = obj[idx];
-            if (name.compareTo(countInfo.getName()) == 0){
-                return idx;
-            }
-        }
-        return -1;
-    }
+//    private int search(String name) {
+//        for (int idx = 0; idx < count; idx++) {
+//            PhoneInfo countInfo = obj[idx];
+//            if (name.compareTo(countInfo.getName()) == 0){
+//                return idx;
+//            }
+//        }
+//        return -1;
+//    }
 }
 

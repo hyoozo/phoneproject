@@ -1,5 +1,7 @@
 package phoneinfoproject;
 
+import java.util.Objects;
+
 public class PhoneInfo {
     private String name;
     private String phoneNumber;
@@ -46,5 +48,17 @@ public class PhoneInfo {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PhoneInfo phoneInfo = (PhoneInfo) o;
+        return name.equals(phoneInfo.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 }
 
