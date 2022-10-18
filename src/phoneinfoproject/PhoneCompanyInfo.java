@@ -1,6 +1,9 @@
 package phoneinfoproject;
+
+import java.io.Serializable;
+
 //회사 동료들의 전화번호 저장
-public class PhoneCompanyInfo extends PhoneInfo{
+public class PhoneCompanyInfo extends PhoneInfo implements Serializable {
 
     private String company;  //회사
 

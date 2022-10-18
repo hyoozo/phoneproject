@@ -1,6 +1,9 @@
 package phoneinfoproject;
+
+import java.io.Serializable;
+
 //대학(학교) 동기들의 전화번호 저장
-public class PhoneUnivInfo extends PhoneInfo{
+public class PhoneUnivInfo extends PhoneInfo implements Serializable {
     private String major;
     private int year;
 

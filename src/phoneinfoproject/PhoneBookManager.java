@@ -1,6 +1,8 @@
 package phoneinfoproject;
 import simplephoneinfo.MenuViewer;
 
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import java.util.Iterator;
 public class PhoneBookManager implements InputMenu, Menu {
@@ -17,7 +19,6 @@ public class PhoneBookManager implements InputMenu, Menu {
 //        count = 0;
 //        obj = new PhoneInfo[MAX_CNT];
 //    }
-
 
     private static PhoneBookManager instance = null;
     public static PhoneBookManager getPhoneBookManager() {  //싱글톤 패턴사용
