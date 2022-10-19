@@ -1,10 +1,9 @@
 package phoneinfoproject;
 
 import simplephoneinfo.MenuViewer;
-
 import java.io.*;
 import java.util.InputMismatchException;
-public class PhonebookVer08 implements Serializable{
+public class PhonebookVer08{
 
     public static void main(String[] args) {
 

@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class PhoneBookManager08 implements InputMenu, Menu, Serializable {
+public class PhoneBookManager08 {
     //7 단계 HashSet 필드와 생성자 구현
     private Iterator<PhoneInfo> itr;
     private HashSet<PhoneInfo> set = new HashSet<>();
@@ -145,12 +145,11 @@ public class PhoneBookManager08 implements InputMenu, Menu, Serializable {
             System.out.println("\t☞ " + itr.next().getName());
         }
     }
-
     public void startPhoneInfo() {
         //파일에 저장된 객체를 읽어 들이기 위해 객체 생성
         set = new HashSet<PhoneInfo>();
         try {
-            in = new ObjectInputStream(new FileInputStream("phoneInfo.data"));
+            in = new ObjectInputStream(new FileInputStream("PhoneBook.dat"));
         } catch (FileNotFoundException e) {
             System.out.println("등록된 데이터가 없습니다.\n");
         } catch (IOException e) {
